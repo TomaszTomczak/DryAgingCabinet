@@ -1,5 +1,5 @@
 from flask import Flask
-import sensor.sensor
+import sensors.sensor_dht22 as sens
 import os
 import threading
 import time
@@ -17,7 +17,7 @@ def getCPUtemperature():
   return(res.replace("temp=","").replace("'C\n",""))
 
 def getRoomTemperature():
-    humidity, temperature = sensor.getHumidityAndTemperature(4) # 4 pin
+    humidity, temperature = sens.getHumidityAndTemperature(4) # 4 pin
     return temperature
 
 @app.route('/')
@@ -37,7 +37,7 @@ def ttt():
 @app.route('/room')
 def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
-    measurement = str(sensor.sensor.getHumidityAndTemperature(4))
+    measurement = str(sens.getHumidityAndTemperature(4))
     l.lcd_string(measurement,lcd.LCD_LINE_1)
     return measurement
 
