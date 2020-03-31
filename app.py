@@ -37,8 +37,11 @@ def ttt():
 @app.route('/room')
 def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
-    measurement = str(sens.getHumidityAndTemperature(4))
-    l.lcd_string(measurement,lcd.LCD_LINE_1)
+    humi, temp = sens.getHumidityAndTemperature(4)
+    humi = round(humi,2)
+    temo = round(temp,2)
+    l.lcd_string("H: "+str(humi),lcd.LCD_LINE_1)
+    l.lcd_string("T: "+str(temp),lcd.LCD_LINE_2)
     return measurement
 
 def tfunc():
