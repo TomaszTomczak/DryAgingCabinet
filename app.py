@@ -1,6 +1,14 @@
 from flask import Flask
-from DryAgingCabinet.sensor import sensor
+import sensor.sensor
 import os
+import threading
+import time
+import display.lcd as lcd
+
+
+VAL = 0
+
+l = lcd.lcd_display()
 
 app = Flask(__name__)
 
@@ -21,11 +29,28 @@ def stats():
     #data = "CPU temperature ", getCPUtemperature()
     return os.popen("vcgencmd measure_temp").readline()
 
-@app.route('/room')
-def stats():
+@app.route('/t')
+def ttt():
     #data = "CPU temperature ", getCPUtemperature()
-    return getRoomTemperature()
+    return str(VAL)
 
+@app.route('/room')
+def roomTemperature():
+    #data = "CPU temperature ", getCPUtemperature()
+    measurement = str(sensor.sensor.getHumidityAndTemperature(4))
+    l.lcd_string(measurement,lcd.LCD_LINE_1)
+    return measurement
+
+def tfunc():
+    while 1:
+        global VAL
+        print('dupa' + str(VAL))
+        VAL+=1
+        time.sleep(10)
 
 if __name__ == '__main__':
+
+    x = threading.Thread(target=tfunc)
+    x.daemon = True
+    x.start()
     app.run(debug=True, host='0.0.0.0')
