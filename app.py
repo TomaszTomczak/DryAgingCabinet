@@ -39,10 +39,10 @@ def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
     humi, temp = sens.getHumidityAndTemperature(4)
     humi = round(humi,2)
-    temo = round(temp,2)
+    temp = round(temp,2)
     l.lcd_string("H: "+str(humi),lcd.LCD_LINE_1)
     l.lcd_string("T: "+str(temp),lcd.LCD_LINE_2)
-    return measurement
+    return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
 
 def tfunc():
     while 1:
