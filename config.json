@@ -1,0 +1,30 @@
+{
+    "sensors" : 
+    [
+        {
+            "name" : "dht22",
+            "position" : [4]
+        }
+    ],
+    "displays" : 
+    [
+        {
+            "type" : "LCD",
+            "name" : "lcd1",
+            "position": 
+            {
+                "RS": 7,
+                "E":  8,
+                "D4" : 25,
+                "D5" : 24,
+                "D6" : 23,
+                "D7" : 18
+            }
+        }
+    ],
+    "climate": 
+    {
+        "temperature" : 20.0,
+        "humidity": 60.0
+    }
+}

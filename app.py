@@ -4,6 +4,7 @@ import os
 import threading
 import time
 import display.lcd as lcd
+from climate import climate as clmt
 
 
 VAL = 0
@@ -11,6 +12,8 @@ VAL = 0
 l = lcd.lcd_display()
 
 app = Flask(__name__)
+c = clmt()
+
 
 def getCPUtemperature():
   res = os.popen("vcgencmd measure_temp").readline()
@@ -37,23 +40,25 @@ def ttt():
 @app.route('/room')
 def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
-    humi, temp = sens.getHumidityAndTemperature(4)
-    humi = round(humi,2)
-    temp = round(temp,2)
+    humi = round(c.getHumidity(),2)
+    temp = round(c.getTemperature(),2)
     l.lcd_string("H: "+str(humi),lcd.LCD_LINE_1)
     l.lcd_string("T: "+str(temp),lcd.LCD_LINE_2)
     return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
 
 def tfunc():
     while 1:
-        global VAL
-        print('dupa' + str(VAL))
-        VAL+=1
-        time.sleep(10)
+        humi = round(c.getHumidity(),2)
+        temp = round(c.getTemperature(),2)
+        l.lcd_string("Humidity: "+str(humi),lcd.LCD_LINE_1)
+        l.lcd_string("Temperature: "+str(temp),lcd.LCD_LINE_2)
+        print(humi,temp)
+        time.sleep(5)
 
 if __name__ == '__main__':
 
     x = threading.Thread(target=tfunc)
     x.daemon = True
     x.start()
+    c.start()
     app.run(debug=True, host='0.0.0.0')
