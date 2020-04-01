@@ -51,7 +51,7 @@ def tfunc():
         humi = round(c.getHumidity(),2)
         temp = round(c.getTemperature(),2)
         l.lcd_string("Humidity: "+str(humi),lcd.LCD_LINE_1)
-        l.lcd_string("Temperature: "+str(temp),lcd.LCD_LINE_2)
+        l.lcd_string("Temp: "+str(temp),lcd.LCD_LINE_2)
         print(humi,temp)
         time.sleep(5)
 
