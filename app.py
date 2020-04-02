@@ -42,6 +42,8 @@ def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
     humi = round(c.getHumidity(),2)
     temp = round(c.getTemperature(),2)
+
+    l.lcd_clear()
     l.lcd_string("H: "+str(humi),lcd.LCD_LINE_1)
     l.lcd_string("T: "+str(temp),lcd.LCD_LINE_2)
     return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)

@@ -121,12 +121,14 @@ class lcd_display:
         GPIO.output(LCD_E, False)
         time.sleep(E_DELAY)
 
+    def lcd_clear(self):
+        self.lcd_byte(0x01, LCD_CMD)
+
     def lcd_string(self, message, line):
         # Cast to string
         message = str(message)
         # Send string to display
         message = message.ljust(LCD_WIDTH, " ")
-        self.lcd_byte(0x01, LCD_CMD)
         self.lcd_byte(line, LCD_CMD)
 
         for i in range(LCD_WIDTH):
