@@ -2,7 +2,7 @@
     "sensors" : 
     [
         {
-            "name" : "dht22",
+            "id" : "dht22",
             "position" : [4]
         }
     ],
@@ -10,7 +10,7 @@
     [
         {
             "type" : "LCD",
-            "name" : "lcd1",
+            "id" : "lcd1",
             "position": 
             {
                 "RS": 7,

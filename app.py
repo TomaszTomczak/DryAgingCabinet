@@ -5,6 +5,9 @@ import threading
 import time
 import display.lcd as lcd
 from climate import climate as clmt
+import display.display_controller as lcd_controller
+import json
+
 
 
 VAL = 0
@@ -59,6 +62,14 @@ def tfunc():
 
 if __name__ == '__main__':
 
+    #load configuration
+    with open("config.json", "r") as read_file:
+        data = json.load(read_file)
+    print(data["displays"])
+
+    lcdcont = lcd_controller.DisplayController(data["displays"])
+    lcdcont.add_printout("lcd1",lcd_controller.Printout("test", "test1", "test2", 15))
+   
     x = threading.Thread(target=tfunc)
     x.daemon = True
     x.start()
