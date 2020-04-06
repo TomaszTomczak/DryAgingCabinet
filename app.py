@@ -13,6 +13,7 @@ import json
 VAL = 0
 
 l = lcd.lcd_display()
+lcdcont = lcd_controller.DisplayController()
 
 app = Flask(__name__)
 c = clmt()
@@ -57,6 +58,7 @@ def tfunc():
         temp = round(c.getTemperature(),2)
         l.lcd_string("Humidity: "+str(humi)+"%",lcd.LCD_LINE_1)
         l.lcd_string("Temp: "+str(temp)+"*",lcd.LCD_LINE_2)
+        lcdcont.update()
         print(humi,temp)
         time.sleep(5)
 
@@ -67,9 +69,11 @@ if __name__ == '__main__':
         data = json.load(read_file)
     print(data["displays"])
 
-    lcdcont = lcd_controller.DisplayController(data["displays"])
-    lcdcont.add_printout("lcd1",lcd_controller.Printout("test", "test1", "test2", 15))
-   
+
+    lcdcont.configure(data["displays"])
+    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
+    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 4))
+    print(lcdcont.get_displays_id())
     x = threading.Thread(target=tfunc)
     x.daemon = True
     x.start()

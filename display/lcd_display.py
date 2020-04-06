@@ -23,6 +23,11 @@ E_DELAY = 0.0005
 class LcdDisplay:
 
     printouts = []
+    immediately = False
+
+    current_counter_index = 0
+    printout_time = 0
+    im_printout_time = 0
     
     def __init__(self, config):
         print("config file below")
@@ -45,21 +50,49 @@ class LcdDisplay:
         GPIO.setup(self.LCD_D7, GPIO.OUT)  # DB7
         self.display_id = config['id']
         self.lcd_init()  # Initialise display
+        print("display id "+ self.display_id+" created")
 
     def print_immediately(self, printout: Printout):
-        pass
+        self.immediately = True
+        self.immediately_printout = printout
 
     def update_printout_data(self, printout: Printout):
         found = False
-        for p in self.printouts:
-            if printout.id == p.id:
-                p = printout
+        for p in range(len(self.printouts)):
+            if self.printouts[p].id == printout.id:
+                self.printouts[p] = printout
                 found = True
-            if not found:
-                self.printouts.append(printout)
+        if not found:
+            self.printouts.append(printout)
 
-    def update(self):
-        pass
+    def update(self): # this method should be invoke every 1s 
+        print("LCD update")
+        print("length: ",len(self.printouts), self.printout_time)
+        if self.immediately:
+            self.lcd_clear()
+            self.lcd_string(self.immediately_printout.firstLine, LCD_LINE_1)
+            self.lcd_string(self.immediately_printout.secondLine, LCD_LINE_2)
+            if self.im_printout_time < self.immediately_printout.duration:
+                self.im_printout_time += 1
+            else:
+                self.im_printout_time = 0
+                self.immediately = False
+        else:
+            
+            self.lcd_clear()
+            if len(self.printouts) > 0 and self.current_counter_index < len(self.printouts):
+                self.lcd_string(self.printouts[self.current_counter_index].firstLine, LCD_LINE_1)
+                self.lcd_string(self.printouts[self.current_counter_index].secondLine, LCD_LINE_2)
+
+                if self.printout_time < self.printouts[self.current_counter_index].duration:
+                    self.printout_time += 1
+                else:
+                    self.printout_time = 0
+                    if len(self.printouts)-1 == self.current_counter_index:
+                        self.current_counter_index = 0
+                    else:
+                        self.current_counter_index += 1
+                
 
     def lcd_init(self):
         # Initialise display
@@ -124,6 +157,7 @@ class LcdDisplay:
         # Cast to string
         message = str(message)
         # Send string to display
+        print("> "+message)
         message = message.ljust(LCD_WIDTH, " ")
         self.lcd_byte(line, LCD_CMD)
 

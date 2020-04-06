@@ -1,6 +1,6 @@
 class Printout:
-    def __init__(self, name: str, firstLine : str, secondLine : str, period : int):
+    def __init__(self, id: str, firstLine : str, secondLine : str, duration : int):
         self.firstLine = firstLine
         self.secondLine = secondLine
-        self.period = period
+        self.duration = duration
         self.id = id
