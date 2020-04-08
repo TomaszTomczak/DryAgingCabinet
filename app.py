@@ -9,6 +9,8 @@ import display.display_controller as lcd_controller
 import json
 
 
+import RPi.GPIO as GPIO
+
 
 VAL = 0
 
@@ -45,9 +47,14 @@ def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
     humi = round(c.getHumidity(),2)
     temp = round(c.getTemperature(),2)
+    GPIO.output(17, GPIO.HIGH) # Turn on
 
-    
-    return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
+@app.route('/turn_off')
+def turnoff():
+    #data = "CPU temperature ", getCPUtemperature()
+    GPIO.output(17, GPIO.LOW) # Turn on
+
+    return 'ok'
 
 def tfunc():
     while 1:
@@ -64,6 +71,9 @@ def tfunc():
 
 if __name__ == '__main__':
 
+    GPIO.setwarnings(False)    # Ignore warning for now
+    GPIO.setmode(GPIO.BCM)   
+    GPIO.setup(17, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial 
     #load configuration
     with open("config.json", "r") as read_file:
         data = json.load(read_file)

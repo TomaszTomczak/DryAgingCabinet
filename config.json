@@ -2,7 +2,8 @@
     "sensors" : 
     [
         {
-            "id" : "dht22",
+            "type" : "dht22",
+            "id" : "sensor1",
             "position" : [4]
         }
     ],
