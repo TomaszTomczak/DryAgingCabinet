@@ -53,7 +53,7 @@ def roomTemperature():
 @app.route('/turn_off')
 def turnoff():
     #data = "CPU temperature ", getCPUtemperature()
-    GPIO.output(17, GPIO.HIGH) # Turn on
+    GPIO.output(17, GPIO.LOW) # Turn on
     return 'ok'
 
     
