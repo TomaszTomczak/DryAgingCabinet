@@ -48,14 +48,15 @@ def roomTemperature():
     humi = round(c.getHumidity(),2)
     temp = round(c.getTemperature(),2)
     GPIO.output(17, GPIO.HIGH) # Turn on
+    return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
 
 @app.route('/turn_off')
 def turnoff():
     #data = "CPU temperature ", getCPUtemperature()
-    GPIO.output(17, GPIO.LOW) # Turn on
-
+    GPIO.output(17, GPIO.HIGH) # Turn on
     return 'ok'
 
+    
 def tfunc():
     while 1:
         humi = round(c.getHumidity(),2)
