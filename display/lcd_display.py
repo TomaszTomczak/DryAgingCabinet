@@ -89,9 +89,10 @@ class LcdDisplay:
                     self.printout_time = 0
                     if len(self.printouts)-1 == self.current_counter_index:
                         self.current_counter_index = 0
+                        self.lcd_clear()
                     else:
                         self.current_counter_index += 1
-                    self.lcd_clear()
+                        self.lcd_clear()
                 
 
     def lcd_init(self):
