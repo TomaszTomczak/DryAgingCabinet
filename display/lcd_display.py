@@ -7,6 +7,7 @@ import struct
 import time
 from time import gmtime, strftime
 from display.lcd_printout import Printout
+from copy import copy
 
 # Define some device constants
 LCD_WIDTH = 16    # Maximum characters per line
@@ -28,6 +29,7 @@ class LcdDisplay:
     current_counter_index = 0
     printout_time = 0
     im_printout_time = 0
+    temporary_printout = Printout("","","",0)
     
     def __init__(self, config):
         print("config file below")
@@ -70,8 +72,7 @@ class LcdDisplay:
         print("length: ",len(self.printouts), self.printout_time)
         if self.immediately:
             self.lcd_clear()
-            self.lcd_string(self.immediately_printout.firstLine, LCD_LINE_1)
-            self.lcd_string(self.immediately_printout.secondLine, LCD_LINE_2)
+            self.lcd_string(self.immediately_printout)
             if self.im_printout_time < self.immediately_printout.duration:
                 self.im_printout_time += 1
             else:
@@ -80,8 +81,8 @@ class LcdDisplay:
         else:
             
             if len(self.printouts) > 0 and self.current_counter_index < len(self.printouts):
-                self.lcd_string(self.printouts[self.current_counter_index].firstLine, LCD_LINE_1)
-                self.lcd_string(self.printouts[self.current_counter_index].secondLine, LCD_LINE_2)
+                
+                self.lcd_string(self.printouts[self.current_counter_index])
 
                 if self.printout_time < self.printouts[self.current_counter_index].duration:
                     self.printout_time += 1
@@ -89,10 +90,8 @@ class LcdDisplay:
                     self.printout_time = 0
                     if len(self.printouts)-1 == self.current_counter_index:
                         self.current_counter_index = 0
-                        self.lcd_clear()
                     else:
                         self.current_counter_index += 1
-                        self.lcd_clear()
                 
 
     def lcd_init(self):
@@ -154,15 +153,25 @@ class LcdDisplay:
     def lcd_clear(self):
         self.lcd_byte(0x01, LCD_CMD)
 
-    def lcd_string(self, message, line):
+    def lcd_string(self, printout: Printout):
+        
+        if not self.temporary_printout == printout:
+            self.temporary_printout = copy(printout)
+            self.lcd_clear()
+        
         # Cast to string
-        message = str(message)
+        message1 = str(printout.firstLine)
+        message2 = str(printout.secondLine)
         # Send string to display
-        print("> "+message)
-        message = message.ljust(LCD_WIDTH, " ")
-        self.lcd_byte(line, LCD_CMD)
+        # print("> "+message)
+        message1 = message1.ljust(LCD_WIDTH, " ")
+        message2 = message2.ljust(LCD_WIDTH, " ")
 
+        self.lcd_byte(LCD_LINE_1, LCD_CMD)
         for i in range(LCD_WIDTH):
-            self.lcd_byte(ord(message[i]), LCD_CHR)
+            self.lcd_byte(ord(message1[i]), LCD_CHR)
+        self.lcd_byte(LCD_LINE_2, LCD_CMD)
+        for i in range(LCD_WIDTH):
+            self.lcd_byte(ord(message2[i]), LCD_CHR)
 
     
