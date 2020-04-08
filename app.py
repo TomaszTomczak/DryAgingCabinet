@@ -60,7 +60,7 @@ def tfunc():
         climatePrintout.secondLine=hstr
         lcdcont.update()
         print(humi,temp)
-        time.sleep(5)
+        time.sleep(1)
 
 if __name__ == '__main__':
 
