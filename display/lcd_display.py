@@ -79,7 +79,6 @@ class LcdDisplay:
                 self.immediately = False
         else:
             
-            self.lcd_clear()
             if len(self.printouts) > 0 and self.current_counter_index < len(self.printouts):
                 self.lcd_string(self.printouts[self.current_counter_index].firstLine, LCD_LINE_1)
                 self.lcd_string(self.printouts[self.current_counter_index].secondLine, LCD_LINE_2)
@@ -92,6 +91,7 @@ class LcdDisplay:
                         self.current_counter_index = 0
                     else:
                         self.current_counter_index += 1
+                    self.lcd_clear()
                 
 
     def lcd_init(self):
