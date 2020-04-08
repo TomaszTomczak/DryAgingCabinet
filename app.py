@@ -3,7 +3,7 @@ import sensors.sensor_dht22 as sens
 import os
 import threading
 import time
-import display.lcd as lcd
+
 from climate import climate as clmt
 import display.display_controller as lcd_controller
 import json
@@ -12,9 +12,8 @@ import json
 
 VAL = 0
 
-l = lcd.lcd_display()
 lcdcont = lcd_controller.DisplayController()
-
+climatePrintout = lcd_controller.Printout("tempandhum", "", "", 4)
 app = Flask(__name__)
 c = clmt()
 
@@ -47,17 +46,18 @@ def roomTemperature():
     humi = round(c.getHumidity(),2)
     temp = round(c.getTemperature(),2)
 
-    l.lcd_clear()
-    l.lcd_string("H: "+str(humi),lcd.LCD_LINE_1)
-    l.lcd_string("T: "+str(temp),lcd.LCD_LINE_2)
+    
     return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
 
 def tfunc():
     while 1:
         humi = round(c.getHumidity(),2)
         temp = round(c.getTemperature(),2)
-        l.lcd_string("Humidity: "+str(humi)+"%",lcd.LCD_LINE_1)
-        l.lcd_string("Temp: "+str(temp)+"*",lcd.LCD_LINE_2)
+        tstr = "Temp: "+str(temp)+"*"
+        hstr = "Humidity: "+str(humi)+"%"
+        #lcdcont.update_printout_data('lcd1',lcd_controller.Printout("temperature", tstr , hstr, 2))
+        climatePrintout.firstLine=tstr
+        climatePrintout.secondLine=hstr
         lcdcont.update()
         print(humi,temp)
         time.sleep(5)
@@ -72,7 +72,8 @@ if __name__ == '__main__':
 
     lcdcont.configure(data["displays"])
     lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
-    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 4))
+    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 3))
+    lcdcont.update_printout_data('lcd1',climatePrintout)
     print(lcdcont.get_displays_id())
     x = threading.Thread(target=tfunc)
     x.daemon = True
