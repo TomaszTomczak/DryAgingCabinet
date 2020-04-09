@@ -5,4 +5,4 @@ class SensorController:
     def configure(self, config):
         for c in configuration:
             if c['type'] == 'dht22':
-                pass
+                pass #need to implement some class for this sensor
