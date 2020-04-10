@@ -4,6 +4,7 @@ import time
 outcome = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
 # rot_enc_table[]= {0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0};
 last_AB = 0b00
+lastCounter = 0
 counter = 0
 if __name__ == '__main__':
 
@@ -24,8 +25,10 @@ if __name__ == '__main__':
         last_AB = current_AB
 
         outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
-        print(outStr)
-        time.sleep(0.01)
+        if not counter == lastCounter:
+            print(outStr)
+            lastCounter = counter
+        time.sleep(0.001)
 
 
 
