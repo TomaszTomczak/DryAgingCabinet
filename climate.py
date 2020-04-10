@@ -21,6 +21,7 @@ class climate:
             humi, temp = sens.getHumidityAndTemperature(4)
             self.temperature = temp
             self.humidity = humi
+            print("data from second sensor: "+str(sens.getHumidityAndTemperatureDHT11(17)))
             time.sleep(5)
 
     def getTemperature(self):

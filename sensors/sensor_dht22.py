@@ -5,3 +5,7 @@ def getHumidityAndTemperature(pin):
     sensor = Adafruit_DHT.DHT22
     humi, temp = Adafruit_DHT.read_retry(sensor, pin)
     return humi,temp
+def getHumidityAndTemperatureDHT11(pin):
+    sensor = Adafruit_DHT.DHT11
+    humi, temp = Adafruit_DHT.read_retry(sensor, pin)
+    return humi,temp
