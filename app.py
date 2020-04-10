@@ -71,7 +71,7 @@ def tfunc():
         A = GPIO.input(17)
         B = GPIO.input(27)
         SW = GPIO.input(22)
-        outStr = "A: "+A+" B: "+B+" SW: "+SW
+        outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW)
         print(outStr)
         time.sleep(1)
 
