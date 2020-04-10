@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 
 if __name__ == '__main__':
 
@@ -15,6 +16,7 @@ if __name__ == '__main__':
         SW = GPIO.input(22)
         outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW)
         print(outStr)
+        time.sleep(0.5)
 
 
 
