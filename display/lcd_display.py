@@ -29,7 +29,7 @@ class LcdDisplay:
     current_counter_index = 0
     printout_time = 0
     im_printout_time = 0
-    temporary_printout = Printout("","","",0)
+    current_printout = Printout("","","",0)
     
     def __init__(self, config):
         print("config file below")
@@ -155,8 +155,8 @@ class LcdDisplay:
 
     def lcd_string(self, printout: Printout):
         
-        if not self.temporary_printout == printout:
-            self.temporary_printout = copy(printout)
+        if not self.current_printout == printout:
+            self.current_printout = copy(printout)
             self.lcd_clear()
         
         # Cast to string

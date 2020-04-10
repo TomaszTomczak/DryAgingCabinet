@@ -47,13 +47,13 @@ def roomTemperature():
     #data = "CPU temperature ", getCPUtemperature()
     humi = round(c.getHumidity(),2)
     temp = round(c.getTemperature(),2)
-    GPIO.output(17, GPIO.HIGH) # Turn on
+    #GPIO.output(17, GPIO.HIGH) # Turn on
     return 'Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temp, humi)
 
 @app.route('/turn_off')
 def turnoff():
     #data = "CPU temperature ", getCPUtemperature()
-    GPIO.output(17, GPIO.LOW) # Turn on
+    # GPIO.output(17, GPIO.LOW) # Turn on LED
     return 'ok'
 
     
@@ -68,14 +68,25 @@ def tfunc():
         climatePrintout.secondLine=hstr
         lcdcont.update()
         print(humi,temp)
+        A = GPIO.input(17)
+        B = GPIO.input(27)
+        SW = GPIO.input(22)
+        outStr = "A: "+A+" B: "+B+" SW: "+SW
+        print(outStr)
         time.sleep(1)
 
 if __name__ == '__main__':
 
     GPIO.setwarnings(False)    # Ignore warning for now
     GPIO.setmode(GPIO.BCM)   
-    GPIO.setup(17, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial 
+    #GPIO.setup(17, GPIO.OUT, initial=GPIO.LOW)   # Set pin 8 to be an output pin and set initial LED
     #load configuration
+    GPIO.setup(17,GPIO.IN) #A
+    GPIO.setup(27,GPIO.IN) #B
+    GPIO.setup(22,GPIO.IN) #switch (chyba)
+
+
+
     with open("config.json", "r") as read_file:
         data = json.load(read_file)
     print(data["displays"])
