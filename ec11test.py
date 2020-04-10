@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
         outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
         print(outStr)
-        time.sleep(0.01)
+        time.sleep(0.001)
 
 
 
