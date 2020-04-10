@@ -1,7 +1,8 @@
 import RPi.GPIO as GPIO
 import time
 
-outcome = [0,-1,1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
+outcome = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
+# rot_enc_table[]= {0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0};
 last_AB = 0b00
 counter = 0
 if __name__ == '__main__':
