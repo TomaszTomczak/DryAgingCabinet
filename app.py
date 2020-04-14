@@ -1,5 +1,4 @@
 from flask import Flask
-import sensors.sensor_dht22 as sens
 import os
 import threading
 import time
@@ -24,9 +23,6 @@ def getCPUtemperature():
   res = os.popen("vcgencmd measure_temp").readline()
   return(res.replace("temp=","").replace("'C\n",""))
 
-def getRoomTemperature():
-    humidity, temperature = sens.getHumidityAndTemperature(4) # 4 pin
-    return temperature
 
 @app.route('/')
 def index():
@@ -93,6 +89,7 @@ if __name__ == '__main__':
 
 
     lcdcont.configure(data["displays"])
+    c.configure(data)
     lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
     lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 3))
     lcdcont.update_printout_data('lcd1',climatePrintout)
