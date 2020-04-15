@@ -10,7 +10,7 @@ class SensorDHT:
         elif config['type']=='dht22':
             self.sensor_type = Adafruit_DHT.DHT22
         self.id = config['id']
-        self.position = config['position']
+        self.position = str(config['position'])
     
     def getReadings(self):
         '''this will return humidity and temperature tuple'''
