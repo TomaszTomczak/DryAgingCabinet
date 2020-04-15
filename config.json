@@ -4,7 +4,7 @@
         {
             "type" : "dht22",
             "id" : "sensor1",
-            "position" : [4]
+            "position" : 4
         }
     ],
     "displays" : 
