@@ -15,6 +15,8 @@ if __name__ == '__main__':
     GPIO.setup(27,GPIO.IN) #B
     GPIO.setup(22,GPIO.IN) #switch (chyba)
 
+#check every 10 loops if value was changed and step it. It will buffer output and reduce noise
+
     while True:
         A = GPIO.input(17)
         B = GPIO.input(27)
