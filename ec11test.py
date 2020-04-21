@@ -6,6 +6,9 @@ outcome = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
 last_AB = 0b00
 lastCounter = 0
 counter = 0
+co = 0
+realValue=0
+
 if __name__ == '__main__':
 
     GPIO.setwarnings(False)    # Ignore warning for now
@@ -16,8 +19,7 @@ if __name__ == '__main__':
     GPIO.setup(10,GPIO.IN) #switch (chyba)
 
 #check every 10 loops if value was changed and step it. It will buffer output and reduce noise
-co = 0
-realValue=0
+
     while True:
         A = GPIO.input(27)
         B = GPIO.input(22)
