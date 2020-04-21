@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
  
 
-        if co%1000 == 0:
+        if co%50 == 0:
             print(str(co%1000)+"  co: "+str(co))
             if lastCounter < counter:
                 realValue += 1
