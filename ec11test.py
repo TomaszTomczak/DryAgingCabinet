@@ -16,7 +16,8 @@ if __name__ == '__main__':
     GPIO.setup(10,GPIO.IN) #switch (chyba)
 
 #check every 10 loops if value was changed and step it. It will buffer output and reduce noise
-
+co = 0
+realValue=0
     while True:
         A = GPIO.input(27)
         B = GPIO.input(22)
@@ -26,7 +27,18 @@ if __name__ == '__main__':
         counter += outcome[position]
         last_AB = current_AB
 
-        outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
+ 
+
+        if co%10 == 0:
+            if lastCounter < counter:
+                realValue += 1
+            elif lastCounter > counter:
+                realValue -= 1
+            co = 0
+        else:
+            co+=1
+        
+        outStr = "Real value: "+str(realValue)+" A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
         print(outStr)
 
         time.sleep(0.001)
