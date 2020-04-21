@@ -34,8 +34,10 @@ if __name__ == '__main__':
         if co%10 == 0:
             if lastCounter < counter:
                 realValue += 1
+                lastCounter = counter
             elif lastCounter > counter:
                 realValue -= 1
+                lastCounter = counter
             co = 0
         else:
             co+=1
