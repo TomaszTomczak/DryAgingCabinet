@@ -27,9 +27,8 @@ if __name__ == '__main__':
         last_AB = current_AB
 
         outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
-        if not counter == lastCounter:
-            print(outStr)
-            lastCounter = counter
+        print(outStr)
+
         time.sleep(0.001)
 
 
