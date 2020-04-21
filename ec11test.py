@@ -40,8 +40,8 @@ if __name__ == '__main__':
                 realValue -= 1
                 lastCounter = counter
             co = 0
-        else:
-            co+=1
+
+        co+=1
         
         outStr = "Real value: "+str(realValue)+" A: "+str(A)+" B: "+str(B)+" SW: "+str(SW) + "counter: "+ str(counter)
         print(outStr)
