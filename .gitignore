@@ -1,3 +1,4 @@
 *.pyc
 Adafruit_DHT.py
 RPi/
+./vscode/

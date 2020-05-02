@@ -61,6 +61,7 @@ def tfunc():
         hstr = "Humidity: "+str(humi)+"%"
         #lcdcont.update_printout_data('lcd1',lcd_controller.Printout("temperature", tstr , hstr, 2))
         climatePrintout.firstLine=tstr
+        #someFunctionOutsideThread()
         climatePrintout.secondLine=hstr
         lcdcont.update()
         print(humi,temp)
@@ -70,6 +71,12 @@ def tfunc():
         #outStr = "A: "+str(A)+" B: "+str(B)+" SW: "+str(SW)
         #print(outStr)
         time.sleep(1)
+
+def someFunctionOutsideThread():
+    for i in range(0,100):
+        print("wypisz: "+str(i))
+        time.sleep(1)
+
 
 if __name__ == '__main__':
 

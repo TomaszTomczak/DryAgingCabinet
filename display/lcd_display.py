@@ -9,6 +9,26 @@ from time import gmtime, strftime
 from display.lcd_printout import Printout
 from copy import copy
 
+# To config file:
+#"displays" : 
+#    [
+#        {
+#            "type" : "LCD",
+#            "id" : "lcd1",
+#            "position": 
+#            {
+#                "RS": 7,
+#                "E":  8,
+#                "D4" : 25,
+#                "D5" : 24,
+#                "D6" : 23,
+#                "D7" : 18
+#            }
+#        }
+#    ],
+
+
+
 # Define some device constants
 LCD_WIDTH = 16    # Maximum characters per line
 LCD_CHR = True
