@@ -61,7 +61,7 @@ while True:
   temp_volts = ConvertVolts(temp_level,2)
   temp       = ConvertTemp(temp_level,2)
 
-    temp_level2 = ReadChannel(light_channel)
+  temp_level2 = ReadChannel(light_channel)
   temp_volts2 = ConvertVolts(temp_level2,2)
   temp2      = ConvertTemp(temp_level2,2)
  
