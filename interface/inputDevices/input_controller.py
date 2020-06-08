@@ -2,6 +2,7 @@ from threading import Thread, Event
 from queue import Queue
 import time
 from abc import ABC, abstractmethod 
+import ec11_encoder
 
 class InputEvent:
     def __init__(self, device_id, data):
@@ -21,6 +22,8 @@ class InputDevice(ABC):
 class InputDeviceFactory:
     @staticmethod
     def get(self, inputDeviceConfig):
+        if inputDeviceConfig["type"] == "encoder":
+            return ec11_encoder.InputEncoderEC11(inputDeviceConfig)
         pass
 
 class InputController:
@@ -31,6 +34,8 @@ class InputController:
     running = True
 
     def __init__(self, config):
+        for device_cfg in config["inputDevices"]:
+            self.inputDevices.append(InputDeviceFactory.get(device_cfg))
 
         self.workerThread = Thread(target=self.update)
         self.eventThread = Thread(target=self.checkInputStatus)

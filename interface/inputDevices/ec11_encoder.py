@@ -1,10 +1,12 @@
 import RPi.GPIO as GPIO
 import time
 from input_controller import InputDevice
+from input_controller import InputEvent
+from queue import Queue
 
 class InputEncoderEC11(InputDevice):
     outcome = [0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0]
-    # rot_enc_table[]= {0,1,-1,0,-1,0,0,1,1,0,0,-1,0,-1,1,0};
+   
     last_AB = 0b00
     lastCounter = 0
     counter = 0
@@ -23,7 +25,7 @@ class InputEncoderEC11(InputDevice):
         GPIO.setup(self.inputB,GPIO.IN) #B
         GPIO.setup(self.inputC,GPIO.IN) #switch (chyba)
 
-    def update(self, eventQueue):
+    def update(self, eventQueue: Queue):
         A = GPIO.input(self.inputA)
         B = GPIO.input(self.inputB)
         SW = GPIO.input(self.inputC)
@@ -35,8 +37,10 @@ class InputEncoderEC11(InputDevice):
             if lastCounter < counter:
                 realValue += 1
                 lastCounter = counter
+                eventQueue.put_nowait(InputEvent(self.id,"up"))
             elif lastCounter > counter:
                 realValue -= 1
                 lastCounter = counter
+                eventQueue.put_nowait(InputEvent(self.id,"down"))
             co = 0
         co+=1
