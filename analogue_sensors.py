@@ -19,7 +19,7 @@ def ReadChannel(channel):
 # Function to convert data to voltage level,
 # rounded to specified number of decimal places.
 def ConvertVolts(data,places):
-  volts = (data * 3.3) / float(1023)
+  volts = (data * 5.0) / float(1023)
   volts = round(volts,places)
   return volts
  
@@ -39,13 +39,13 @@ def ConvertTemp(data,places):
   #  775      200    2.50
   # 1023      280    3.30
   print(data)
-  temp = ((data * 330)/float(1023))-50
+  temp = ((data * 500)/float(1023))
   temp = round(temp,places)
   return temp
  
 # Define sensor channels
 light_channel = 0
-temp_channel  = 0
+temp_channel  = 1
  
 # Define delay between readings
 delay = 5
