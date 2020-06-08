@@ -44,8 +44,8 @@ def ConvertTemp(data,places):
   return temp
  
 # Define sensor channels
-light_channel = 1
-temp_channel  = 1
+light_channel = 0
+temp_channel  = 0
  
 # Define delay between readings
 delay = 5
