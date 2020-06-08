@@ -60,11 +60,16 @@ while True:
   temp_level = ReadChannel(temp_channel)
   temp_volts = ConvertVolts(temp_level,2)
   temp       = ConvertTemp(temp_level,2)
+
+    temp_level2 = ReadChannel(light_channel)
+  temp_volts2 = ConvertVolts(temp_level2,2)
+  temp2      = ConvertTemp(temp_level2,2)
  
   # Print out results
   print ("--------------------------------------------")
-  print("Light: {} ({}V)".format(light_level,light_volts))
-  print("Temp : {} ({}V) {} deg C".format(temp_level,temp_volts,temp))
+
+  print("Temp sensor 1: {} ({}V) {} deg C".format(temp_level,temp_volts,temp))
+  print("Temp sensor 2: {} ({}V) {} deg C".format(temp_level2,temp_volts2,temp2))
  
   # Wait before repeating loop
   time.sleep(delay)
