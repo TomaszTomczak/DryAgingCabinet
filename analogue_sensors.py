@@ -62,7 +62,7 @@ while True:
   temp       = ConvertTemp(temp_level,2)
  
   # Print out results
-  print "--------------------------------------------"
+  print ("--------------------------------------------")
   print("Light: {} ({}V)".format(light_level,light_volts))
   print("Temp : {} ({}V) {} deg C".format(temp_level,temp_volts,temp))
  
