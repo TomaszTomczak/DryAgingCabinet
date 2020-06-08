@@ -38,13 +38,13 @@ def ConvertTemp(data,places):
   #  465      100    1.50
   #  775      200    2.50
   # 1023      280    3.30
- 
+  print(data)
   temp = ((data * 330)/float(1023))-50
   temp = round(temp,places)
   return temp
  
 # Define sensor channels
-light_channel = 0
+light_channel = 1
 temp_channel  = 1
  
 # Define delay between readings
