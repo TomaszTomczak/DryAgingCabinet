@@ -65,7 +65,7 @@ def tfunc():
         #someFunctionOutsideThread()
         climatePrintout.secondLine=hstr
         lcdcont.update()
-        print(str(datetime.datetime.now())+"\t"+str(humi)+"\t"+str(temp))
+        print(str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute)+":"+str(datetime.datetime.now().second)+"\t"+str(humi)+"\t"+str(temp))
         #A = GPIO.input(17)
         #B = GPIO.input(27)
         #SW = GPIO.input(22)
