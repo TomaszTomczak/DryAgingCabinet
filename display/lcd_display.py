@@ -88,8 +88,8 @@ class LcdDisplay:
             self.printouts.append(printout)
 
     def update(self): # this method should be invoke every 1s 
-        print("LCD update")
-        print("length: ",len(self.printouts), self.printout_time)
+        #print("LCD update")
+        #print("length: ",len(self.printouts), self.printout_time)
         if self.immediately:
             self.lcd_clear()
             self.lcd_string(self.immediately_printout)

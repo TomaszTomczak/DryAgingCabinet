@@ -2,6 +2,7 @@ from flask import Flask
 import os
 import threading
 import time
+import datetime
 
 from climate import climate as clmt
 import display.display_controller as lcd_controller
@@ -64,7 +65,7 @@ def tfunc():
         #someFunctionOutsideThread()
         climatePrintout.secondLine=hstr
         lcdcont.update()
-        print(humi,temp)
+        print(str(datetime.datetime.now())+"\t"+str(humi)+"\t"+str(temp))
         #A = GPIO.input(17)
         #B = GPIO.input(27)
         #SW = GPIO.input(22)
@@ -97,9 +98,9 @@ if __name__ == '__main__':
 
     lcdcont.configure(data["displays"])
     c.configure(data)
-    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
-    lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 3))
-    lcdcont.update_printout_data('lcd1',climatePrintout)
+    #lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
+    #lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 3))
+    #lcdcont.update_printout_data('lcd1',climatePrintout)
     print(lcdcont.get_displays_id())
     x = threading.Thread(target=tfunc)
     x.daemon = True
