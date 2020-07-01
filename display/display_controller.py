@@ -1,5 +1,6 @@
 from display.lcd_printout import Printout
 from display.lcd_display import LcdDisplay
+from display.lcd_i2c_display import LcdI2CDisplay
 
 class DisplayController:
     displays = [] # this list will contain all display instances
