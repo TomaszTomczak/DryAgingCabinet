@@ -15,6 +15,6 @@ class SensorDHT:
     def getReadings(self):
         '''this will return humidity and temperature tuple'''
         humi, temp = Adafruit_DHT.read_retry(self.sensor_type, self.position)
-        if temp is NoneType or humi is NoneType:
+        if temp is None or humi is None:
             raise Exception("Sensor data reading error")
         return humi, temp
