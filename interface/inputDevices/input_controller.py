@@ -43,7 +43,7 @@ class InputController:
         self.workerThread = Thread(target=self.update)
         self.eventThread = Thread(target=self.checkInputStatus)
         self.workerThread.setDaemon(True)
-        self.checkThread.setDaemon(True)
+        self.eventThread.setDaemon(True)
         self.workerThread.start()
         self.eventThread.start()
         print("join worker")
