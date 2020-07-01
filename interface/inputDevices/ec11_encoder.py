@@ -48,7 +48,7 @@ class InputEncoderEC11(InputDevice):
                 if not self.SW_press_notified:
                     print("button pressed")
                     self.SW_press_notified = True
- 
+        if self.co%10 == 0:
             if self.counter != 0:
                 if self.counter < 0:
                     print("up")
