@@ -33,7 +33,7 @@ class InputEncoderEC11(InputDevice):
         position = (self.last_AB<<2) | current_AB
         self.counter += self.outcome[position]
         self.last_AB = current_AB
-        if self.co%10 == 0:
+        if self.co%250 == 0:
             if SW == 1:
                 print("button pressed")
             if self.lastCounter < self.counter:
@@ -46,5 +46,5 @@ class InputEncoderEC11(InputDevice):
                 self.lastCounter = self.counter
                 eventQueue.put_nowait(InputEvent(self.id,"down"))
                 print("down")
-            self.co = 0
+            
         self.co+=1
