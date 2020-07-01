@@ -9,7 +9,9 @@ class DisplayController:
     def configure(self,configuration):
         for c in configuration:
             print("add dispal with id "+c['id'])
-            self.displays.append(LcdDisplay(c))
+            #self.displays.append(LcdDisplay(c))
+            self.displays.append(LcdI2CDisplay(c))
+            
 
     def print_immediately(self, display_id, printout: Printout):
          for d in self.displays:
