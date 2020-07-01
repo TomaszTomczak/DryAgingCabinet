@@ -49,7 +49,7 @@ class InputController:
         print("join worker")
         #self.workerThread.join()
         print("join checkThread")
-        self.eventThread.join()
+        #self.eventThread.join()
         print("all threads running")
 
     def register(self, client: InputEventReceiver):
