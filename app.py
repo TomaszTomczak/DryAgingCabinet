@@ -56,8 +56,14 @@ def turnoff():
     
 def tfunc():
     while 1:
-        humi = round(c.getHumidity(),2)
-        temp = round(c.getTemperature(),2)
+        try:
+            humi = round(c.getHumidity(),2)
+            temp = round(c.getTemperature(),2)
+        except:
+            humi = 0
+            temp = 0
+            print("readings data error")
+            
         tstr = "Temp: "+str(temp)+"*"
         hstr = "Humidity: "+str(humi)+"%"
         #lcdcont.update_printout_data('lcd1',lcd_controller.Printout("temperature", tstr , hstr, 2))
