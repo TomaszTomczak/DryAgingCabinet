@@ -33,6 +33,22 @@ class InputEncoderEC11(InputDevice):
         position = (self.last_AB<<2) | current_AB
         self.counter += self.outcome[position]
         self.last_AB = current_AB
+
+        self.SW_counter += SW
+
+        if self.co%100 == 0:
+            if self.SW_counter > 0:
+                print("button pressed")
+                self.SW_counter = 0
+            if self.counter != 0:
+                if self.counter < 0:
+                    print("up")
+                else:
+                    print("down")
+                self.counter = 0
+        self.co=+1
+
+    def waste(self, eventQueue: Queue):
         if self.co%250 == 0:
             if SW == 1:
                 print("button pressed")
