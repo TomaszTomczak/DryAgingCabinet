@@ -22,10 +22,15 @@ class climate:
 
     def update(self):
         while 1:
-            humi, temp = self.sensor_c.getReadings('sensor1')
-            self.temperature = temp
-            self.humidity = humi
-            #print("data from second sensor: "+str(sens.getHumidityAndTemperatureDHT11(17)))
+            try:
+                humi, temp = self.sensor_c.getReadings('sensor1')
+                self.temperature = temp
+                self.humidity = humi
+                #print("data from second sensor: "+str(sens.getHumidityAndTemperatureDHT11(17)))
+            except:
+                print("reading data error for sensor: sensor1")
+                self.temperature = 0
+                self.humidity = 0
             time.sleep(5)
 
     def getTemperature(self):
