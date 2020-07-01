@@ -7,6 +7,19 @@
             "position" : 4
         }
     ],
+    "inputs" :
+    [
+        {
+            "type": "encoder",
+            "id" : "encoder1",
+            "position":
+            {
+                "A" : 27,
+                "B" : 22,
+                "C" : 10
+            }
+        }
+    ],
     "displays" : 
     [
         {

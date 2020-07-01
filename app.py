@@ -7,6 +7,7 @@ import datetime
 from climate import climate as clmt
 import display.display_controller as lcd_controller
 import json
+from interface.inputDevices.input_controller import InputController
 
 
 import RPi.GPIO as GPIO
@@ -106,6 +107,8 @@ if __name__ == '__main__':
     lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test", "test1", "test2", 2))
     lcdcont.update_printout_data('lcd1',lcd_controller.Printout("test123", "test55", "test66", 3))
     #lcdcont.update_printout_data('lcd1',climatePrintout)
+    interface = InputController(data["inputs"])
+
     print(lcdcont.get_displays_id())
     x = threading.Thread(target=tfunc)
     x.daemon = True

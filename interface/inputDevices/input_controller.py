@@ -34,7 +34,7 @@ class InputController:
     running = True
 
     def __init__(self, config):
-        for device_cfg in config["inputDevices"]:
+        for device_cfg in config["inputs"]:
             self.inputDevices.append(InputDeviceFactory.get(device_cfg))
 
         self.workerThread = Thread(target=self.update)
@@ -65,11 +65,12 @@ class InputController:
         while self.running:
             while not self.actions.empty():
                 data = self.actions.get()
+                print(data)
                 for receiver in self.eventReceivers:
                     receiver.onInputEvent(data)
             time.sleep(0.01)
 
-if __name__ == '__main__':
-    
-    x = InputController("test")
-    x.print()
+#if __name__ == '__main__':
+#    
+#    x = InputController("test")
+#    x.print()
