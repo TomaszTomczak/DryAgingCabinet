@@ -33,14 +33,14 @@ class InputEncoderEC11(InputDevice):
         position = (self.last_AB<<2) | current_AB
         self.counter += self.outcome[position]
         self.last_AB = current_AB
-        if co%100 == 0:
-            if lastCounter < counter:
-                realValue += 1
-                lastCounter = counter
+        if self.co%100 == 0:
+            if self.lastCounter < self.counter:
+                self.realValue += 1
+                self.lastCounter = self.counter
                 eventQueue.put_nowait(InputEvent(self.id,"up"))
-            elif lastCounter > counter:
-                realValue -= 1
-                lastCounter = counter
+            elif lastCounter > self.counter:
+                self.realValue -= 1
+                self.lastCounter = self.counter
                 eventQueue.put_nowait(InputEvent(self.id,"down"))
-            co = 0
-        co+=1
+            self.co = 0
+        self.co+=1
