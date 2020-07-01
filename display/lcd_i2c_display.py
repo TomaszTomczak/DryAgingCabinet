@@ -8,7 +8,7 @@ import time
 from time import gmtime, strftime
 from display.lcd_printout import Printout
 from copy import copy
-from display.I2C_LCD_driver import I2C_LCD_driver
+import display.I2C_LCD_driver
 from time import *
 
 # To config file:
