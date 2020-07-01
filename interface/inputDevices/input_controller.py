@@ -2,7 +2,7 @@ from threading import Thread, Event
 from queue import Queue
 import time
 from abc import ABC, abstractmethod 
-import interface.inputDevices.ec11_encoder
+from interface.inputDevices.ec11_encoder import InputEncoderEC11
 
 class InputEvent:
     def __init__(self, device_id, data):
