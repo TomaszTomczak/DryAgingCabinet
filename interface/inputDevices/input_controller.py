@@ -22,7 +22,7 @@ class InputDevice(ABC):
 from interface.inputDevices.ec11_encoder import InputEncoderEC11
 class InputDeviceFactory:
     @staticmethod
-    def get(self, inputDeviceConfig):
+    def get(inputDeviceConfig):
         if inputDeviceConfig["type"] == "encoder":
             return ec11_encoder.InputEncoderEC11(inputDeviceConfig)
         pass
