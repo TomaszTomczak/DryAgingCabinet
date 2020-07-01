@@ -36,6 +36,8 @@ class InputController:
 
     def __init__(self, config):
         for device_cfg in config["inputs"]:
+            print("loading configuration")
+            print(device_cfg)
             self.inputDevices.append(InputDeviceFactory.get(device_cfg))
 
         self.workerThread = Thread(target=self.update)
