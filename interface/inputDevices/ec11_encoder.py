@@ -13,6 +13,8 @@ class InputEncoderEC11(InputDevice):
     co = 0
     realValue=0
     SW_counter = 0
+    SW_pressed = False
+    SW_press_notified = False
 
     def __init__(self, config):
         self.inputA = config["position"]["A"]
@@ -34,13 +36,19 @@ class InputEncoderEC11(InputDevice):
         position = (self.last_AB<<2) | current_AB
         self.counter += self.outcome[position]
         self.last_AB = current_AB
+        if SW == 0:
+            self.SW_pressed = False
+            self.SW_press_notified = False
+            self.SW_counter = 0
 
         self.SW_counter += SW
 
         if self.co%100 == 0:
             if self.SW_counter > 0:
-                print("button pressed")
-                self.SW_counter = 0
+                if not self.SW_press_notified:
+                    print("button pressed")
+                    self.SW_press_notified = True
+ 
             if self.counter != 0:
                 if self.counter < 0:
                     print("up")
