@@ -47,7 +47,7 @@ class InputEncoderEC11(InputDevice):
                 else:
                     print("down")
                 self.counter = 0
-        self.co=+1
+        self.co+=1
 
     def waste(self, eventQueue: Queue):
         if self.co%250 == 0:
