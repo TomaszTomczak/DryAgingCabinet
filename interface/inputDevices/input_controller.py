@@ -24,7 +24,7 @@ class InputDeviceFactory:
     @staticmethod
     def get(inputDeviceConfig):
         if inputDeviceConfig["type"] == "encoder":
-            return ec11_encoder.InputEncoderEC11(inputDeviceConfig)
+            return InputEncoderEC11(inputDeviceConfig)
         pass
 
 class InputController:
