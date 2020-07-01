@@ -59,7 +59,7 @@ class LcdI2CDisplay:
     def __init__(self, config):
         print("config file below")
         print(config)
-
+        self.display_id = config['id']
         self.disp = I2C_LCD_driver.lcd()
         print("display id "+ self.display_id+" created")
 
