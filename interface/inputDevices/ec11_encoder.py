@@ -38,7 +38,7 @@ class InputEncoderEC11(InputDevice):
                 self.realValue += 1
                 self.lastCounter = self.counter
                 eventQueue.put_nowait(InputEvent(self.id,"up"))
-            elif lastCounter > self.counter:
+            elif self.lastCounter > self.counter:
                 self.realValue -= 1
                 self.lastCounter = self.counter
                 eventQueue.put_nowait(InputEvent(self.id,"down"))
