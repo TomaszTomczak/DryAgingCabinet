@@ -12,6 +12,7 @@ class InputEncoderEC11(InputDevice):
     counter = 0
     co = 0
     realValue=0
+    SW_counter = 0
 
     def __init__(self, config):
         self.inputA = config["position"]["A"]
