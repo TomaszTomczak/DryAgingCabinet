@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
-from input_controller import InputDevice
-from input_controller import InputEvent
+from interface.inputDevices.input_controller import InputDevice
+from interface.inputDevices.input_controller import InputEvent
 from queue import Queue
 
 class InputEncoderEC11(InputDevice):
