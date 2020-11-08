@@ -32,7 +32,7 @@ DEVICE = 0x76 # Default device I2C address
 
 bus = smbus.SMBus(1) # Rev 2 Pi, Pi 2 & Pi 3 uses bus 1
                      # Rev 1 Pi uses bus 0
-i = 0 #loop iterator
+
 def getShort(data, index):
   # return two bytes from data as a signed 16-bit value
   return c_short((data[index+1] << 8) + data[index]).value
@@ -158,7 +158,7 @@ def readBME280All(addr=DEVICE):
     humidity = 0
 
   return temperature/100.0,pressure/100.0,humidity
-
+iter = 0
 def main():
 
  # (chip_id, chip_version) = readBME280ID()
@@ -171,9 +171,10 @@ def main():
  # print ("Pressure : ", pressure, "hPa")
  # print ("Humidity : ", humidity, "%")
 #  while 1:
-   coldPlateTemp = sensor.get_temperature()
-   print (i," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
    i+=1
+   coldPlateTemp = sensor.get_temperature()
+   print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
+   
    time.sleep(1)
 if __name__=="__main__":
    main()
