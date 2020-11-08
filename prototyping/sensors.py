@@ -32,7 +32,7 @@ DEVICE = 0x76 # Default device I2C address
 
 bus = smbus.SMBus(1) # Rev 2 Pi, Pi 2 & Pi 3 uses bus 1
                      # Rev 1 Pi uses bus 0
-
+i = 0 #loop iterator
 def getShort(data, index):
   # return two bytes from data as a signed 16-bit value
   return c_short((data[index+1] << 8) + data[index]).value
@@ -172,7 +172,7 @@ def main():
  # print ("Humidity : ", humidity, "%")
 #  while 1:
    coldPlateTemp = sensor.get_temperature()
-   print ("T: ",temperature," H: ", humidity," cold plate temp: ",coldPlateTemp)
+   print (i," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
    time.sleep(1)
 if __name__=="__main__":
    main()
