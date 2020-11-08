@@ -158,9 +158,9 @@ def readBME280All(addr=DEVICE):
     humidity = 0
 
   return temperature/100.0,pressure/100.0,humidity
-iter = 0
-def main():
 
+def main():
+  iter = 0
  # (chip_id, chip_version) = readBME280ID()
  # print( "Chip ID     :", chip_id)
  # print( "Version     :", chip_version)
@@ -171,7 +171,7 @@ def main():
  # print ("Pressure : ", pressure, "hPa")
  # print ("Humidity : ", humidity, "%")
 #  while 1:
-   i+=1
+   iter+=1
    coldPlateTemp = sensor.get_temperature()
    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
    
