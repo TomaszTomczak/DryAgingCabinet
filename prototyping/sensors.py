@@ -173,6 +173,7 @@ def main():
 #  while 1:
    coldPlateTemp = sensor.get_temperature()
    print (i," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
+   i+=1
    time.sleep(1)
 if __name__=="__main__":
    main()
