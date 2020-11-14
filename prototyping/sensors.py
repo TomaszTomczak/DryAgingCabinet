@@ -212,7 +212,7 @@ def main():
     if mode == "staycold":
       if coldPlateTemp > -5.0:
         freeze = True#GPIO.output(22, GPIO.LOW) #mrozimy
-      else
+      else:
         if coldPlateTemp<-10.0:
           freeze = False#GPIO.output(22, GPIO.HIGH) #nie mrozimy
 
@@ -224,7 +224,7 @@ def main():
         if temperature <3.5:
           fanon = False#fanoff
           fanmode = "heating"
-        else
+        else:
           fanon = True
       else: #heating
         if temperature > 4.5:
