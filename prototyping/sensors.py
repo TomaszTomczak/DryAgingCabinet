@@ -25,6 +25,7 @@ from ctypes import c_byte
 from ctypes import c_ubyte
 import w1thermsensor
 import RPi.GPIO as GPIO
+import Adafruit_DHT
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(22, GPIO.OUT)
@@ -242,7 +243,13 @@ def main():
       GPIO.output(17, GPIO.HIGH)
     else:
       GPIO.output(17, GPIO.LOW)
-    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"fan: ",fanon,"freeze:",freeze)
+
+    humiAmbient, tempAmbient = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 10)
+    if tempAmbient is None or humiAmbient is None:
+      print("sensor problem")
+
+    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"\tfan: ",fanon,"\tfreeze:",freeze)
+    print ("ambient temperature: ",tempAmbient,"\t ambient humidity",humiAmbient)
     time.sleep(1)
 
 if __name__=="__main__":
