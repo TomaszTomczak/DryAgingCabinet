@@ -250,8 +250,6 @@ def main():
     print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)
     time.sleep(1)
 
-ambientH = 0
-ambientT = 0
 
 def ambientMeasurements():
   ambientH, ambientT = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 10)
