@@ -254,8 +254,8 @@ ambientT = 0
 
 def ambientMeasurements():
   ambientH, ambientT = Adafruit_DHT.read_retry(Adafruit_DHT.DHT21, 10)
-    if ambientH is None or ambientT is None:
-      print("sensor problem")
+  if ambientH is None or ambientT is None:
+    print("sensor problem")
 
 if __name__=="__main__":
   try:
