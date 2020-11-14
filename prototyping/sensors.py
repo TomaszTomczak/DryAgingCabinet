@@ -242,7 +242,7 @@ def main():
       GPIO.output(17, GPIO.HIGH)
     else:
       GPIO.output(17, GPIO.LOW)
-      print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"fan: ",fanon,"freeze:",freeze)
+    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"fan: ",fanon,"freeze:",freeze)
     time.sleep(1)
 
 if __name__=="__main__":
