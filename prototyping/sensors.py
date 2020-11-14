@@ -182,7 +182,7 @@ def main():
    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
    if iter%2==0:
     GPIO.output(22, GPIO.HIGH)
-   else
+   else:
     GPIO.output(22, GPIO.LOW)
 
    
