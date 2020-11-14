@@ -239,15 +239,17 @@ def main():
       GPIO.output(22, GPIO.HIGH)
 
     if fanon:
-      GPIO.output(27, GPIO.HIGH)
+      GPIO.output(17, GPIO.HIGH)
     else:
-      GPIO.output(27, GPIO.LOW)
+      GPIO.output(17, GPIO.LOW)
       print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"fan: ",fanon,"freeze:",freeze)
     time.sleep(1)
 
 if __name__=="__main__":
   try:
     main()
+  except Exception as e:
+    print(e)
   except KeyboardInterrupt:  
     pass
   finally:
