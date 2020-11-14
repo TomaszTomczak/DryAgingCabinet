@@ -199,4 +199,11 @@ def main():
    
    time.sleep(1)
 if __name__=="__main__":
-   main()
+  try:
+    main()
+  except KeyboardInterrupt:  
+    # here you put any code you want to run before the program   
+    # exits when you press CTRL+C  
+    print "\n", counter # print value of counter
+  finally:  
+    GPIO.cleanup() # this ensures a clean exit  
