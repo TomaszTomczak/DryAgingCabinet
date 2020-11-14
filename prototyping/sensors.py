@@ -36,6 +36,7 @@ GPIO.output(27, GPIO.LOW)
 GPIO.output(17, GPIO.LOW)
 
 
+
 sensor = w1thermsensor.W1ThermSensor()
  
 DEVICE = 0x76 # Default device I2C address
@@ -244,16 +245,23 @@ def main():
     else:
       GPIO.output(17, GPIO.LOW)
 
-    humiAmbient, tempAmbient = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 10)
-    if tempAmbient is None or humiAmbient is None:
-      print("sensor problem")
-
     print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"\tfan: ",fanon,"\tfreeze:",freeze)
-    print ("ambient temperature: ",tempAmbient,"\t ambient humidity",humiAmbient)
+    print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)
     time.sleep(1)
+
+ambientH = 0
+ambientT = 0
+
+def ambientMeasurements()
+  ambientH, ambientT = Adafruit_DHT.read_retry(Adafruit_DHT.DHT21, 10)
+    if ambientH is None or ambientT is None:
+      print("sensor problem")
 
 if __name__=="__main__":
   try:
+    x = threading.Thread(target=ambientMeasurements)
+    x.daemon = True
+    x.start()
     main()
   except Exception as e:
     print(e)
