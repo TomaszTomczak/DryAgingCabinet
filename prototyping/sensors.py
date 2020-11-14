@@ -202,7 +202,6 @@ if __name__=="__main__":
   try:
     main()
   except KeyboardInterrupt:  
-    # here you put any code you want to run before the program   
-    # exits when you press CTRL+C  
-  finally:  
+    pass
+  finally:
     GPIO.cleanup() # this ensures a clean exit  
