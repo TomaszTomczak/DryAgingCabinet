@@ -204,7 +204,7 @@ def main():
     targetInsideTemp = 4.0
 
 
-    if coldPlateTemp > -10.0 and mode == "initial":
+    if coldPlateTemp > -2.0 and mode == "initial":
       freeze = True #GPIO.output(22, GPIO.LOW) #mrozimy
     else:
       mode = "staycold"
