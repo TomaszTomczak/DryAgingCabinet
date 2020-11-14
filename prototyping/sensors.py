@@ -255,10 +255,11 @@ ambientT = 0
 
 def ambientMeasurements():
   while True:
-    ambientH, ambientT = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 26)
+    t, h = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 26)
+
     if ambientH is None or ambientT is None:
       print("sensor problem")
-  
+    print("readings",t,"h",h)
     time.sleep(2)
 
 if __name__=="__main__":
