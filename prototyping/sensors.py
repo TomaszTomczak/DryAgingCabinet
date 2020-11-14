@@ -248,10 +248,12 @@ def main():
       GPIO.output(17, GPIO.LOW)
 
     print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"\tfan: ",fanon,"\tfreeze:",freeze)
-    print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)
+    print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)   
     time.sleep(1)
 
 def ambientMeasurements():
+  global ambientH
+  global ambientT
   while True:
     h, t = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 26)
     ambientT = t
@@ -259,6 +261,7 @@ def ambientMeasurements():
     if ambientH is None or ambientT is None:
       print("sensor problem")
     #print("readings",t,"h",h)
+
     time.sleep(2)
 
 if __name__=="__main__":
