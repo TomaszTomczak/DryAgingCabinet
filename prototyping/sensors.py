@@ -228,7 +228,7 @@ def main():
           fanon = True
       else: #heating
         if temperature > 4.5:
-          fanmode = "freezing":
+          fanmode = "freezing"
           fanon = True
         else:
           fanon = False
