@@ -36,7 +36,8 @@ GPIO.output(22, GPIO.HIGH)
 GPIO.output(27, GPIO.LOW)
 GPIO.output(17, GPIO.LOW)
 
-
+ambientH = 0
+ambientT = 0
 
 sensor = w1thermsensor.W1ThermSensor()
  
@@ -250,16 +251,14 @@ def main():
     print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)
     time.sleep(1)
 
-ambientH = 0
-ambientT = 0
-
 def ambientMeasurements():
   while True:
-    t, h = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 26)
-
+    h, t = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 26)
+    ambientT = t
+    ambientH = h
     if ambientH is None or ambientT is None:
       print("sensor problem")
-    print("readings",t,"h",h)
+    #print("readings",t,"h",h)
     time.sleep(2)
 
 if __name__=="__main__":
