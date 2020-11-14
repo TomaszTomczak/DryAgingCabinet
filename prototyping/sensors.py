@@ -24,6 +24,12 @@ from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 import w1thermsensor
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(22, GPIO.OUT)
+GPIO.output(22, GPIO.HIGH)
+
 
 sensor = w1thermsensor.W1ThermSensor()
  
@@ -174,6 +180,11 @@ def main():
    iter+=1
    coldPlateTemp = sensor.get_temperature()
    print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
+   if iter%2==0:
+    GPIO.output(22, GPIO.HIGH)
+   else
+    GPIO.output(22, GPIO.LOW)
+
    
    time.sleep(1)
 if __name__=="__main__":
