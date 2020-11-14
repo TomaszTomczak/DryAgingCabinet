@@ -170,34 +170,81 @@ def readBME280All(addr=DEVICE):
   return temperature/100.0,pressure/100.0,humidity
 
 def main():
+  mode = "initial"
+  fanmode = "freezing"
+  freeze = True
+  fanon = False
+
   iter = 0
  # (chip_id, chip_version) = readBME280ID()
  # print( "Chip ID     :", chip_id)
  # print( "Version     :", chip_version)
   while 1:
-   temperature,pressure,humidity = readBME280All()
+    temperature,pressure,humidity = readBME280All()
 
  # print ("Temperature : ", temperature, "C")
  # print ("Pressure : ", pressure, "hPa")
  # print ("Humidity : ", humidity, "%")
 #  while 1:
-   iter+=1
-   coldPlateTemp = sensor.get_temperature()
-   print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp)
-   if iter%2==0:
-    GPIO.output(22, GPIO.HIGH)
-   else:
-    GPIO.output(22, GPIO.LOW)
+    iter+=1
+    coldPlateTemp = sensor.get_temperature()
 
-   if iter%3==0:
-     GPIO.output(17, GPIO.HIGH)
-     GPIO.output(27, GPIO.LOW)
-   else:
-     GPIO.output(17, GPIO.LOW)
-     GPIO.output(27, GPIO.HIGH)
+    #if iter%2==0:
+    #  GPIO.output(22, GPIO.HIGH)
+    #else:
+    #  GPIO.output(22, GPIO.LOW)
 
-   
-   time.sleep(1)
+    #if iter%3==0:
+    #  GPIO.output(17, GPIO.HIGH)
+    #  GPIO.output(27, GPIO.LOW)
+    #else:
+    #  GPIO.output(17, GPIO.LOW)
+    #  GPIO.output(27, GPIO.HIGH)
+    targetColdPlateTemp = -10.0
+    targetInsideTemp = 4.0
+
+
+    if coldPlateTemp > -10.0 and mode == "initial":
+      freeze = True #GPIO.output(22, GPIO.LOW) #mrozimy
+    else:
+      mode = "staycold"
+  
+    if mode == "staycold":
+      if coldPlateTemp > -5.0:
+        freeze = True#GPIO.output(22, GPIO.LOW) #mrozimy
+      else
+        if coldPlateTemp<-10.0:
+          freeze = False#GPIO.output(22, GPIO.HIGH) #nie mrozimy
+
+
+    
+      #fan steering
+    if mode == "staycold":
+      if fanmode == "freezing":
+        if temperature <3.5:
+          fanon = False#fanoff
+          fanmode = "heating"
+        else
+          fanon = True
+      else: #heating
+        if temperature > 4.5:
+          fanmode = "freezing":
+          fanon = True
+        else:
+          fanon = False
+
+    if freeze:
+      GPIO.output(22, GPIO.LOW)
+    else:
+      GPIO.output(22, GPIO.HIGH)
+
+    if fanon:
+      GPIO.output(27, GPIO.HIGH)
+    else:
+      GPIO.output(27, GPIO.LOW)
+      print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"fan: ",fanon,"freeze:",freeze)
+    time.sleep(1)
+
 if __name__=="__main__":
   try:
     main()
