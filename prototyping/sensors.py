@@ -26,6 +26,7 @@ from ctypes import c_ubyte
 import w1thermsensor
 import RPi.GPIO as GPIO
 import Adafruit_DHT
+import threading
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(22, GPIO.OUT)
@@ -256,6 +257,7 @@ def ambientMeasurements():
   ambientH, ambientT = Adafruit_DHT.read_retry(Adafruit_DHT.DHT21, 10)
   if ambientH is None or ambientT is None:
     print("sensor problem")
+  time.sleep(2)
 
 if __name__=="__main__":
   try:
