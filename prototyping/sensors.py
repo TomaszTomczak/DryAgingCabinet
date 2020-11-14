@@ -28,7 +28,11 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(22, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 GPIO.output(22, GPIO.HIGH)
+GPIO.output(27, GPIO.LOW)
+GPIO.output(17, GPIO.LOW)
 
 
 sensor = w1thermsensor.W1ThermSensor()
@@ -184,6 +188,13 @@ def main():
     GPIO.output(22, GPIO.HIGH)
    else:
     GPIO.output(22, GPIO.LOW)
+
+   if iter%3==0:
+     GPIO.output(17, GPIO.HIGH)
+     GPIO.output(27, GPIO.LOW)
+   else:
+     GPIO.output(17, GPIO.LOW)
+     GPIO.output(27, GPIO.HIGH)
 
    
    time.sleep(1)
