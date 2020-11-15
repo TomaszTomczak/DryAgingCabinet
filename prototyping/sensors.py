@@ -248,7 +248,7 @@ def main():
       GPIO.output(17, GPIO.LOW)
 
     #print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"\tfan: ",fanon,"\tfreeze:",freeze,"at:",ambientT)
-    print (iter,"\t",temperature,"\t", humidity,"\t\t",coldPlateTemp,"\t\t",int(fanon),"\t",int(freeze),"\t",ambientT)
+    print (iter,"\t",round(temperature,2),"\t", round(humidity,2),"\t\t",round(coldPlateTemp,2),"\t\t",int(fanon),"\t",int(freeze),"\t",round(ambientT,2))
     #print ("ambient temperature: ",ambientT,"\t ambient humidity",ambientH)   
     time.sleep(1)
 
