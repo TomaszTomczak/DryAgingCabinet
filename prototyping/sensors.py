@@ -214,10 +214,10 @@ def main():
       mode = "staycold"
   
     if mode == "staycold":
-      if coldPlateTemp > -5.0:
+      if coldPlateTemp > -7.5:
         freeze = True#GPIO.output(22, GPIO.LOW) #mrozimy
       else:
-        if coldPlateTemp<-10.0:
+        if coldPlateTemp<-13.0:
           freeze = False#GPIO.output(22, GPIO.HIGH) #nie mrozimy
 
 
