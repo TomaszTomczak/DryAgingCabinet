@@ -246,6 +246,13 @@ def main():
       GPIO.output(17, GPIO.HIGH)
     else:
       GPIO.output(17, GPIO.LOW)
+    
+
+    if humidity < 80.0:
+      GPIO.output(27, GPIO.HIGH)
+    if humidity > 85.0:
+      GPIO.output(27, GPIO.LOW)
+
 
     #print (iter," T: ",temperature," H: ", humidity,"\t cold plate temp: ",coldPlateTemp,"\tfan: ",fanon,"\tfreeze:",freeze,"at:",ambientT)
     print (iter,"\t",round(temperature,2),"\t", round(humidity,2),"\t\t",round(coldPlateTemp,2),"\t\t",int(fanon),"\t",int(freeze),"\t",round(ambientT,2))
